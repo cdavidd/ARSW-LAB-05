@@ -1,20 +1,37 @@
 <!DOCTYPE html>
 <html>
-    <head>
-            <title>Blueprints</title>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-            <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
-            <script src="/webjars/bootstrap/4.1.2/js/bootstrap.min.js"></script>
-            <link rel="stylesheet"
-                href="/webjars/bootstrap/4.1.2/css/bootstrap.min.css" />
-    </head>
+<head>
+    <title>Blueprints</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/4.1.2/css/bootstrap.min.css"/>
+</head>
+
+<script>
+    function createTableFromJSON(autor) {
+        var url = "http://localhost:8080/blueprints/"+autor;
+        fetch(url).then((resp) => resp.json()).then(function(){
+            console.log(resp);
+        })
+    }
+</script>
+
 <body>
 
-<h1>My First Heading</h1>
+<h2>Blueprints</h2>
 
-<p>My first paragraph.</p>
+<div class="container">
+    <form>
+        <p>Author <input id="author" size="20" type="text"/>
+            <button type="button" class="btn btn-primary" onclick="createTableFromJSON(author.value)">Get blueprints</button>
+        </p>
+        <p id="showData"></p>
+    </form>
+</div>
 
 </body>
 </html>
