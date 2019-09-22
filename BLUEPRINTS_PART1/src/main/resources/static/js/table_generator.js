@@ -1,5 +1,5 @@
 function getAuthorBlueprints(author){
-    //Si ingresa autor
+    //Si ingresa autor != null
     if (author){
         let url = "http://localhost:8080/blueprints/"+author;
         $.getJSON(url, function (blueprints) {
@@ -9,11 +9,25 @@ function getAuthorBlueprints(author){
                 $("#blueprintTable > tbody").append(row);
                 row.append($("<td>" + blueprints[i].name + "</td>"));
                 row.append($("<td>" + blueprints[i].points.length + "</td>"));
-                row.append($("<td><form><button class='btn btn-primary'>Open</button></form></td>"));
+                row.append($("<td><form><button type='button' class='btn btn-primary' onclick='blueprintOpen( \"" + author + "\" , \"" + blueprints[i].name + "\")' data-toggle='modal' data-target='#blueprintPointsModal'>Open</button></form></td>"));
             }
         })
     }
     else{
         alert("No author provided");
     }
+}
+
+function blueprintOpen(author,blueprintName) {
+    let url = "http://localhost:8080/blueprints/"+author+"/"+blueprintName;
+    $.getJSON(url, function (blueprint) {
+        $("#blueprintPointsTable > tbody").empty();
+        for (let i = 0; i < blueprint.points.length; i++){
+            let row = $("<tr />");
+            $("#blueprintPointsTable > tbody").append(row);
+            row.append("<td>" + blueprint.points[i].x + "</td>");
+            row.append("<td>" + blueprint.points[i].y + "</td>");
+        }
+
+    })
 }
