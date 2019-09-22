@@ -9,16 +9,8 @@
     <script src="/webjars/bootstrap/4.1.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet"
           href="/webjars/bootstrap/4.1.2/css/bootstrap.min.css"/>
+    <script src="js/table_generator.js"></script>
 </head>
-
-<script>
-    function createTableFromJSON(autor) {
-        var url = "http://localhost:8080/blueprints/"+autor;
-        fetch(url).then((resp) => resp.json()).then(function(){
-            console.log(resp);
-        })
-    }
-</script>
 
 <body>
 
@@ -27,10 +19,26 @@
 <div class="container">
     <form>
         <p>Author <input id="author" size="20" type="text"/>
-            <button type="button" class="btn btn-primary" onclick="createTableFromJSON(author.value)">Get blueprints</button>
+            <button id="authBpButton" type="button" class="btn btn-primary" onclick="getAuthorBlueprints(author.value)">
+                Get blueprints
+            </button>
         </p>
-        <p id="showData"></p>
     </form>
+
+        <table id="blueprintTable" class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Blueprint name</th>
+                    <th>Number of points</th>
+                    <th>Open</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Datos mediante js -->
+            </tbody>
+
+        </table>
+
 </div>
 
 </body>
