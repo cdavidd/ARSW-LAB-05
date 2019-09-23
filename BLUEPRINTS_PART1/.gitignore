@@ -2,6 +2,13 @@
 angular-seed/node_modules
 angular-seed/dist/
 
+.settings/
+bin/
+.classpath
+.project
+
+
+
 # Created by https://www.gitignore.io/api/node,gradle,intellij+all
 
 ### Intellij+all ###
