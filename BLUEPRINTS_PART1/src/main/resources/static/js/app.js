@@ -16,8 +16,9 @@ var BlueprintModule = (function() {
     $("#blueprintSum > h3").text("Total user points: " + sum);
   };
 
-  //blueprints : mapeo de blueprints
   var _genTable = function(blueprints) {
+    blueprints = _mapNamePoints(blueprints);
+    _authorBlueprint = blueprints;
     _sumPoints(blueprints);
     $("#blueprintTable > tbody").empty(); //Limpia el cuerpo de la tabla para otros datos
     blueprints.map(function(blueprint) {
@@ -62,7 +63,7 @@ var BlueprintModule = (function() {
   var updateListPlans = function(author) {
     changeAuthorName(author);
     $("#blueprintAuthorName > h2").text(author + "'s blueprints: ");
-    _genTable(apiRest.getBlueprintsByAuthor(author, _mapNamePoints));
+    apiRest.getBlueprintsByAuthor(author, _genTable);
   };
 
   var openPlane = function(author, name) {
