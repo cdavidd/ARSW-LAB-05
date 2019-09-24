@@ -1,3 +1,4 @@
+var apiRest = apimock;
 var BlueprintModule = (function() {
   var _author;
   var _authorBlueprint = [];
@@ -38,13 +39,13 @@ var BlueprintModule = (function() {
   };
 
   var _pintar = function(blueprint) {
-    $("#tituloPlano").text("Current blueprint: " + blueprint[0].name);
+    $("#tituloPlano").text("Current blueprint: " + blueprint.name);
     var c = document.getElementById("myCanvas");
     var ctx = c.getContext("2d");
     ctx.clearRect(0, 0, c.width, c.height);
     ctx.beginPath();
     var anterior;
-    blueprint[0].points.map(function(point) {
+    blueprint.points.map(function(point) {
       if (!anterior) {
         anterior = point;
         ctx.moveTo(anterior.x, anterior.y);
@@ -61,11 +62,11 @@ var BlueprintModule = (function() {
   var updateListPlans = function(author) {
     changeAuthorName(author);
     $("#blueprintAuthorName > h2").text(author + "'s blueprints: ");
-    _genTable(apimock.getBlueprintsByAuthor(author, _mapNamePoints));
+    _genTable(apiRest.getBlueprintsByAuthor(author, _mapNamePoints));
   };
 
   var openPlane = function(author, name) {
-    apimock.getBlueprintsByNameAndAuthor(author, name, _pintar);
+    apiRest.getBlueprintsByNameAndAuthor(author, name, _pintar);
   };
 
   return {

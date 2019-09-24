@@ -48,7 +48,7 @@ apimock = (function() {
       return callback(
         mockdata[author].filter(obj => {
           return obj.name === name;
-        })
+        })[0]
       );
     }
   };
