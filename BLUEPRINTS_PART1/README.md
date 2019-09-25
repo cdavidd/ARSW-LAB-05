@@ -91,7 +91,7 @@ var BlueprintModule = (function() {
   var _author;
   var _authorBlueprint = [];
 
-  //métodos
+  //métodos omitidos
   
   return {
     changeAuthorName: changeAuthorName,
@@ -100,3 +100,58 @@ var BlueprintModule = (function() {
   
 })();
 ```
+Función `map`:
+```javascript
+var _mapNamePoints = function(blueprints) {
+    return blueprints.map(function(blueprint) {
+      return { name: blueprint.name, points: blueprint.points.length };
+    });
+  };
+```
+Función para generar la tabla `_genTable()`:
+```javascript
+var _genTable = function(blueprints) {
+    blueprints = _mapNamePoints(blueprints);
+    _authorBlueprint = blueprints;
+    _sumPoints(blueprints);
+    $("#blueprintTable > tbody").empty(); //Limpia el cuerpo de la tabla para otros datos
+    blueprints.map(function(blueprint) {
+      $("#blueprintTable > tbody").append(
+        "<tr> <td>" +
+          blueprint.name +
+          "</td>" +
+          "<td>" +
+          blueprint.points +
+          "</td>" +
+          "<td><form><button type='button' class='btn btn-primary' onclick='BlueprintModule.openPlane( \"" +
+          _author +
+          '" , "' +
+          blueprint.name +
+          "\")' >Open</button></form></td>" +
+          "</tr>"
+      );
+    });
+  };
+```
+
+Función para calcular el total de puntos `_sumPoints()`:
+```javascript
+var _sumPoints = function(blueprints) {
+    var sum = blueprints.reduce(function(total, currentValue) {
+      return total + currentValue.points;
+    }, 0);
+    $("#blueprintSum > h3").text("Total user points: " + sum);
+  };
+```
+
+En `index.html` se coloca en el evento `on-click` para llamar las funciones de `BlueprintModule`:
+```html
+<button
+              id="authBpButton"
+              type="button"
+              class="btn btn-primary"
+              onclick="BlueprintModule.updateListPlans(author.value)"
+            >
+```
+
+## Next Week
