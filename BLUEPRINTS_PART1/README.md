@@ -154,4 +154,10 @@ En `index.html` se coloca en el evento `on-click` para llamar las funciones de `
             >
 ```
 
+Las imagenes muestran el funcionamiento de los eventos:
+
+![](img/bt_press.JPG)
+
+![](img/bt_press2.JPG)
+
 ## Next Week
